@@ -59,25 +59,3 @@ All models struggled to predict capacity utilization (best R² = 0.14), suggesti
 2. Add ticket pricing data if available
 3. Explore ensemble methods (Random Forest, XGBoost) for potential improvement
 4. Consider time-series forecasting for seasonal patterns
-
-## Repository Structure
-
-```
-tour-data-capstone/
-├── data/
-│   ├── 2024_2025_MasterDocument.csv
-│   ├── 2024_2025_MasterDocument_enriched.csv
-│   └── us_only_with_states.csv
-├── images/
-│   ├── time_series_analysis.png
-│   └── artist_country_heatmap.png
-├── lib/
-│   ├── external_city_lookup.py
-│   └── external_artist_lookup.py
-├── prompt_V.ipynb
-└── README.md
-```
-
-## Author
-
-Adam Heinz | UC Berkeley ML/AI Professional Certificate Program | January 2025
