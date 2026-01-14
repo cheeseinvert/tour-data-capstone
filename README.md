@@ -1,27 +1,83 @@
-# Can we predict revenue & venue capacity utilization?
+# Can We Predict Revenue & Venue Capacity Utilization?
 
-Data exploration of Ticketmaster tour data
+Data exploration and predictive modeling of Ticketmaster tour data.
 
-**Jupyter notebook:** https://github.com/cheeseinvert/tour-data-capstone/blob/main/prompt_V.ipynb
+**Jupyter Notebook:** [prompt_V.ipynb](https://github.com/cheeseinvert/tour-data-capstone/blob/main/prompt_V.ipynb)
 
-## Research Question:
+## Research Question
 
-Using available live event ticket sales data, can we create a predictive model to allow live event tour planners to accurately predict tour revenue and or venue capacity utilization for new tours?
+Using available live event ticket sales data, can we create a predictive model to allow live event tour planners to accurately predict tour revenue and/or venue capacity utilization for new tours?
 
-## Data Source:
+## Data Source
 
-Ticketmaster US and Canada live event tour data (Artist Name, Event Date, Venue, City, Country, Revenue, Estimated Capacity, and Tickets Sold)
+Ticketmaster US and Canada live event tour data including Artist Name, Event Date, Venue, City, Country, Revenue, Estimated Capacity, and Tickets Sold.
 
-touringdata.org allows access to this data via year-specific master documents from 2024 onward via the Patreon link: https://www.patreon.com/c/touringdataLinks to an external site.
+- **Source:** [touringdata.org](https://www.patreon.com/c/touringdata) (2024-2025 data)
+- **Records:** 7,774 events after cleaning
+- **Enrichment:** State lookups via Google API, artist genres via Spotify API
 
-### Techniques to Be Used:
+## Key Findings
 
-Feature correlation analysis and hyper-parameter grid search and cross-validation will be applied to a set of predictive modeling techniques discussed in this program, like linear regression, to discover feature importance and compare accuracy scores.
+### Revenue Prediction: Success ✅
+| Model | R² Score | RMSE |
+|-------|----------|------|
+| Linear Regression | 0.76 | $1.6M |
+| Ridge + Polynomial | 0.81 | $1.4M |
+| Decision Tree | 0.76 | $1.6M |
+| **Neural Network** | **0.84** | **$1.3M** |
 
-## Expected Results:
+The neural network model explains **84% of variance** in tour revenue using venue capacity, timing (month, day of week), number of shows, state, and genre as features.
 
-I expect the answer to the research question is yes, using combinations of dependent features like Event Date, Artist Name, Venue, City and Country that we will be able to generate a reasonably accurate predictive model of expected revenue and venue capacity utilization.
+### Capacity Utilization Prediction: Limited Success ⚠️
+| Model | R² Score |
+|-------|----------|
+| Ridge Regression | 0.12 |
+| Decision Tree | 0.09 |
+| Neural Network | 0.14 |
 
-## Importance of the Question:
+All models struggled to predict capacity utilization (best R² = 0.14), suggesting this metric depends heavily on factors not captured in the dataset—such as artist popularity/social media presence, ticket pricing strategy, local market conditions, and competing events.
 
-There are many factors that drive the costs of operation for a live event tour like venue & performance costs, travel & logistics, etc. Being able to accurately predict revenue and attendance are key to allow for successful tour planning. Live event tour planners must generate financially sustainable schedules for performers to meet goals of both bottom-line revenue generation and exhibition to the largest number of event attendees in the most efficient manner.
+## Actionable Recommendations for Tour Planners
+
+1. **Revenue is predictable:** Use venue capacity and timing features to estimate expected revenue with reasonable accuracy (~84% variance explained).
+
+2. **Capacity utilization requires additional data:** Consider supplementing Ticketmaster data with artist social media metrics, historical fan engagement, or market-specific demand indicators.
+
+3. **Feature importance:** Venue capacity and number of shows are the strongest predictors of revenue—book appropriately-sized venues for your artist's draw.
+
+## Techniques Used
+
+- Feature correlation analysis
+- One-hot encoding for categorical variables (State, Genre)
+- Multiple regression approaches: Linear, Ridge, Polynomial, Decision Tree, Neural Network
+- Hyperparameter tuning via GridSearchCV with cross-validation
+- Evaluation metrics: R², RMSE, MAE
+
+## Next Steps
+
+1. Incorporate artist popularity metrics (Spotify followers, social media engagement)
+2. Add ticket pricing data if available
+3. Explore ensemble methods (Random Forest, XGBoost) for potential improvement
+4. Consider time-series forecasting for seasonal patterns
+
+## Repository Structure
+
+```
+tour-data-capstone/
+├── data/
+│   ├── 2024_2025_MasterDocument.csv
+│   ├── 2024_2025_MasterDocument_enriched.csv
+│   └── us_only_with_states.csv
+├── images/
+│   ├── time_series_analysis.png
+│   └── artist_country_heatmap.png
+├── lib/
+│   ├── external_city_lookup.py
+│   └── external_artist_lookup.py
+├── prompt_V.ipynb
+└── README.md
+```
+
+## Author
+
+Adam Heinz | UC Berkeley ML/AI Professional Certificate Program | January 2025
