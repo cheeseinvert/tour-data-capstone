@@ -21,7 +21,7 @@ Ticketmaster US and Canada live event tour data including Artist Name, Event Dat
 ### Revenue Prediction: Success ✅
 | Model | R² Score | RMSE |
 |-------|----------|------|
-| Linear Regression | 0.76 | $1.6M |
+| Linear Regression | 0.81 | $1.4M |
 | Ridge + Polynomial | 0.81 | $1.4M |
 | Decision Tree | 0.76 | $1.6M |
 | **Neural Network** | **0.84** | **$1.3M** |
@@ -31,11 +31,12 @@ The neural network model explains **84% of variance** in tour revenue using venu
 ### Capacity Utilization Prediction: Limited Success ⚠️
 | Model | R² Score |
 |-------|----------|
-| Ridge Regression | 0.12 |
-| Decision Tree | 0.09 |
-| Neural Network | 0.14 |
+| Linear Regression | 0.12 |
+| Ridge + Polynomial | 0.12 |
+| Decision Tree | 0.11 |
+| Neural Network | 0.15 |
 
-All models struggled to predict capacity utilization (best R² = 0.14), suggesting this metric depends heavily on factors not captured in the dataset—such as artist popularity/social media presence, ticket pricing strategy, local market conditions, and competing events.
+All models struggled to predict capacity utilization (best R² = 0.15), suggesting this metric depends heavily on factors not captured in the dataset—such as artist popularity/social media presence, ticket pricing strategy, local market conditions, and competing events.
 
 ## Actionable Recommendations for Tour Planners
 
